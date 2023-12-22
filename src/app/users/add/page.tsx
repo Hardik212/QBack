@@ -2,8 +2,11 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Input, Button } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export default function UserForm() {
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -26,6 +29,7 @@ export default function UserForm() {
       .then((res) => res.json())
       .then((user) => {
         console.log(user);
+        router.push("../users");
       });
   };
 

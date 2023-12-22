@@ -84,24 +84,19 @@ export const CellRenderer: CellRenderer = {
     if (!value && value !== 0) {
       return <EmptyCellRenderer />;
     }
-    return (
-      <Tooltip title={value || "-"}>
-        {searchKeyword ? (
-          <div
-            className="truncate content-highlight"
-            dangerouslySetInnerHTML={{
-              __html: highlight(
-                value,
-                [{ text: searchKeyword, ignoreCase: true }],
-                true
-              ),
-            }}
-          />
-        ) : (
-          <div className="truncate">{value}</div>
-        )}
-      </Tooltip>
-    );
+    const highlightedValue = searchKeyword
+    ? highlight(
+        value,
+        [{ text: searchKeyword, ignoreCase: true }],
+        true
+      )
+    : value;
+
+  return (
+    <Tooltip title={value || "-"}>
+      <div className="truncate" dangerouslySetInnerHTML={{ __html: highlightedValue }} />
+    </Tooltip>
+  );
   },
   [CELL_TYPES.RICH_TEXT]: ({ cell, rowData }) => {
     const value = cell.column.accessor(rowData);
