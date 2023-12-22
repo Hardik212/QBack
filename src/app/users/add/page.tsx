@@ -33,33 +33,57 @@ export default function UserForm() {
       });
   };
 
+  const inputStyle: React.CSSProperties = {
+    marginTop: '10px',
+    padding: '8px',
+    width: '100%',
+    boxSizing: 'border-box',
+  };
+  
+  const buttonStyle: React.CSSProperties = {
+    background: 'blue',
+    color: 'white',
+    marginTop: '10px',
+    padding: '10px 15px',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
+  };
+  
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit} style={{ maxWidth: '400px', margin: 'auto' }}>
       <Input
         name="username"
         placeholder="Username"
         value={formik.values.username}
         onChange={formik.handleChange}
+        style={inputStyle}
       />
       <Input
         name="password"
+        type="password"
         placeholder="Password"
         value={formik.values.password}
         onChange={formik.handleChange}
+        style={inputStyle}
       />
       <Input
         name="name"
         placeholder="Name"
         value={formik.values.name}
         onChange={formik.handleChange}
+        style={inputStyle}
       />
       <Input
         name="role"
         placeholder="Role"
         value={formik.values.role}
         onChange={formik.handleChange}
+        style={inputStyle}
       />
-      <Button type="submit">Submit</Button>
+      <Button type="submit" style={buttonStyle}>
+        Submit
+      </Button>
     </form>
-  );
+  );  
 }

@@ -1,14 +1,21 @@
 "use client"
 import React, { useState, useEffect } from "react";
 
+interface User {
+  username: string;
+  password: string;
+  name: string;
+  role: string;
+}
+
 export default function UserDetails({
   params,
 }: {
   params: { id: string };
 }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -23,9 +30,9 @@ export default function UserDetails({
 
         const data = await response.json();
         setUser(data);
-      } catch (err) {
-
-        // setError(err.message);
+      } catch (err:any) {
+        
+        setError(err.message);
       } finally {
         setLoading(false);
       }

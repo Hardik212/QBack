@@ -11,7 +11,6 @@ import { OTable } from "@/fwk/oTable";
 import { Avatar } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { CELL_TYPES, ColumnBuilder } from "@/fwk/oTable";
-import { highlight } from "@/fwk/utils";
 
 const getInitials = (name: string) => {
   const words = name.split(" ");
@@ -24,7 +23,7 @@ const getInitials = (name: string) => {
 const Columns = [
   ColumnBuilder()
     .component((data: { row: { original: User } }) => (
-      <Avatar style={{ backgroundColor: "green" }}>
+      <Avatar className="avatar">
         {getInitials(data.row.original.name)}
       </Avatar>
     ))
@@ -83,11 +82,11 @@ export default function UserList({ data: initialData }: UserListProps) {
   stickyHeader
   columns={Columns.map((column) => {
     if (column.id === "name" || column.id === "username" || column.id === "role") {
-      column.Cell = ({ cell, rowData }) => {
+      column.Cell = function CustomCell({ cell, rowData }) {
         const content = cell.column.accessor(rowData);
         const lowerContent = content.toLowerCase();
         const lowerSearchTerm = searchTerm.toLowerCase();
-
+        
         const indexOfMatch = lowerContent.indexOf(lowerSearchTerm);
         if (indexOfMatch !== -1 && searchTerm.trim() !== "") {
           return (

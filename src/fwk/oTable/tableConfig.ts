@@ -121,10 +121,10 @@ function ColumnBuilder(initialConfig?: Column) {
     },
 
     // deprecated
-    style(v: React.CSSProperties) {
-      column.style = v;
-      return this;
-    },
+      style(v: React.CSSProperties) {
+        const updatedColumn = { ...column, style: v };
+        return ColumnBuilder(updatedColumn);
+      },
 
     align(v: "left" | "right" | "center") {
       column.align = v;

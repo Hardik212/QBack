@@ -22,3 +22,8 @@
 .cp {
   cursor: pointer;
 }
+
+.avatar{
+  background-color: #4790fc;
+  border: black 1px solid;
+}
